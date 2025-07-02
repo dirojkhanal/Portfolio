@@ -1,0 +1,42 @@
+<svg width="300" height="300" viewBox="0 0 300 300" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background Circle -->
+  <circle cx="150" cy="150" r="150" fill="url(#gradient)" />
+  
+  <!-- Person Icon -->
+  <g transform="translate(150, 150)">
+    <!-- Head -->
+    <circle cx="0" cy="-30" r="35" fill="rgba(255,255,255,0.9)" />
+    
+    <!-- Body -->
+    <path d="M-50 20 Q-50 0 -30 0 L30 0 Q50 0 50 20 L50 80 Q50 100 30 100 L-30 100 Q-50 100 -50 80 Z" 
+          fill="rgba(255,255,255,0.9)" />
+    
+    <!-- Arms -->
+    <ellipse cx="-65" cy="30" rx="15" ry="40" fill="rgba(255,255,255,0.9)" />
+    <ellipse cx="65" cy="30" rx="15" ry="40" fill="rgba(255,255,255,0.9)" />
+  </g>
+  
+  <!-- Decorative Elements -->
+  <circle cx="80" cy="80" r="3" fill="rgba(255,255,255,0.6)" />
+  <circle cx="220" cy="100" r="2" fill="rgba(255,255,255,0.6)" />
+  <circle cx="90" cy="220" r="2.5" fill="rgba(255,255,255,0.6)" />
+  <circle cx="210" cy="230" r="3" fill="rgba(255,255,255,0.6)" />
+  
+  <!-- Code Brackets -->
+  <g transform="translate(60, 60)" fill="rgba(255,255,255,0.4)">
+    <path d="M0 5 L5 0 L15 0 L15 3 L8 3 L8 7 L15 7 L15 10 L5 10 Z" />
+  </g>
+  
+  <g transform="translate(225, 200)" fill="rgba(255,255,255,0.4)">
+    <path d="M10 5 L5 0 L-5 0 L-5 3 L2 3 L2 7 L-5 7 L-5 10 L5 10 Z" />
+  </g>
+  
+  <!-- Gradient Definition -->
+  <defs>
+    <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#3b82f6;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#6366f1;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#f59e0b;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+</svg>

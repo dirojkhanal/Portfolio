@@ -1,0 +1,43 @@
+This is a placeholder for the resume PDF file. In a real implementation, you would place the actual PDF file here.
+The resume would contain all the information from the uploaded resume:
+
+Diroj Khanal
++977 9843739212
+khanaldiroj22@gmail.com
+linkedin.com/in/diroj-khanal
+github.com/dirojkhanal
+
+SUMMARY
+Creative and detail-oriented Frontend Developer with a strong foundation in HTML, CSS, JavaScript, and React.js. Skilled in building responsive, user-friendly interfaces with clean code. Experienced in API integration, Git, and performance optimization. Passionate about learning and delivering quality user experiences through modern web development.
+
+TECHNICAL SKILLS
+• Languages: HTML5, CSS3, JavaScript (ES6+), TypeScript
+• Frameworks/Libraries: React.js, Tailwind CSS, Bootstrap, Next.js
+• Tools: Git, GitHub, VS Code, Chrome DevTools
+• Database: SQL, MongoDB
+• Testing: Jest, React Testing Library
+• Build Tools: Webpack, Vite, npm/yarn
+
+PROJECTS
+1. Debounce Search App – [GitHub] Live Demo
+Tech Stack: React.js, JavaScript, CSS
+• Built a fast, responsive search UI using debounce to optimize API requests.
+• Managed input delay and side effects with custom hooks.
+
+2. JDH E-Commerce Store – [GitHub] Live Demo
+Tech Stack: HTML, CSS, JavaScript
+• Designed a mobile-friendly product page with image carousel and cart functionality.
+• Used localStorage for cart persistence and added accessibility features.
+
+3. Weather App – [GitHub] Live Demo
+Tech Stack: React.js, OpenWeatherMap API, Tailwind CSS
+• Displayed real-time weather using external API with error handling.
+• Featured dark/light mode and responsive layout using Tailwind.
+
+CERTIFICATIONS
+• Modern JavaScript – Udemy View Certificate
+• React.js for Beginners – Simplilearn View Certificate
+
+EDUCATION
+Bachelor in Information Technology
+Tribhuvan University Expected Graduation: 2026
