@@ -226,35 +226,49 @@ function validateForm() {
  */
 function handleFormSubmission() {
     if (contactForm) {
-        contactForm.addEventListener('submit', (e) => {
+        contactForm.addEventListener('submit', async (e) => {
             e.preventDefault();
-            
+
             if (validateForm()) {
-                // Simulate form submission
                 const formButton = contactForm.querySelector('.form__button');
                 const formSuccess = document.getElementById('form-success');
-                
+                const nameInput = contactForm.querySelector('input[name="name"]');
+                const emailInput = contactForm.querySelector('input[name="email"]');
+                const messageInput = contactForm.querySelector('textarea[name="message"]');
+
                 // Disable button and show loading state
                 formButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
                 formButton.disabled = true;
-                
-                // Simulate API call delay
-                setTimeout(() => {
-                    // Show success message
-                    formSuccess.classList.add('show');
-                    
-                    // Reset form
-                    contactForm.reset();
-                    
-                    // Reset button
-                    formButton.innerHTML = '<i class="fas fa-paper-plane"></i> Send Message';
-                    formButton.disabled = false;
-                    
-                    // Hide success message after 5 seconds
-                    setTimeout(() => {
-                        formSuccess.classList.remove('show');
-                    }, 5000);
-                }, 2000);
+
+                // Send data to backend
+                try {
+                    const response = await fetch('http://localhost:4000/api/contact', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({
+                            name: nameInput.value.trim(),
+                            email: emailInput.value.trim(),
+                            message: messageInput.value.trim()
+                        })
+                    });
+                    const data = await response.json();
+                    if (data.success) {
+                        formSuccess.classList.add('show');
+                        contactForm.reset();
+                        // Hide success message after 5 seconds
+                        setTimeout(() => {
+                            formSuccess.classList.remove('show');
+                        }, 5000);
+                    } else {
+                        alert(data.error || 'Failed to send message.');
+                    }
+                } catch (err) {
+                    alert('Failed to send message. Please try again later.');
+                }
+
+                // Reset button
+                formButton.innerHTML = '<i class="fas fa-paper-plane"></i> Send Message';
+                formButton.disabled = false;
             }
         });
     }
