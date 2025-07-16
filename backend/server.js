@@ -28,9 +28,20 @@ app.use('/api/auth', authRouter);
 app.use('/api/analytics', analyticsRouter);
 app.use('/api/content', contentRouter);
 app.use('/api/contact_submissions', contactSubmissionsRouter);
+app.use('/assets', express.static(path.join(__dirname, '..', 'frontend', 'assets')));
 
 app.get('/', (req, res) => {
   res.send('Portfolio Backend API is running.');
+});
+
+app.get('/api/download/resume', (req, res) => {
+  const filePath = path.join(__dirname, '..', 'frontend', 'assets', 'resume.pdf');
+  res.download(filePath, (err) => {
+    if (err) {
+      console.error('Download error:', err);
+      res.status(404).send('Resume not found');
+    }
+  });
 });
 
 app.listen(PORT, () => {

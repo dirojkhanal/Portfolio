@@ -1,5 +1,8 @@
 // Admin Dashboard Interactivity
-const API_BASE = 'http://localhost:4000';
+const API_BASE =
+  window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
+    ? 'http://localhost:4000'
+    : 'https://your-backend-url.com'; // <-- Replace with your deployed backend URL
 const loginContainer = document.getElementById('admin-login');
 const dashboardContainer = document.getElementById('admin-dashboard');
 const loginForm = document.getElementById('admin-login-form');
@@ -144,6 +147,45 @@ sidebarLinks.forEach(link => {
   });
 });
 
+// Render contact submissions
+async function loadContactsSection() {
+  const container = document.getElementById('admin-contacts-list');
+  container.innerHTML = '<div>Loading...</div>';
+  try {
+    const res = await apiFetch(`${API_BASE}/api/contact_submissions`);
+    const contacts = await res.json();
+    if (!contacts.length) {
+      container.innerHTML = '<div>No contact submissions found.</div>';
+      return;
+    }
+    container.innerHTML = '';
+    contacts.forEach(sub => {
+      const div = document.createElement('div');
+      div.className = 'admin-contact-item';
+      div.innerHTML = `
+        <div><strong>Name:</strong> ${sub.name}</div>
+        <div><strong>Email:</strong> ${sub.email}</div>
+        <div><strong>Message:</strong> ${sub.message}</div>
+        <div><strong>Date:</strong> ${sub.date ? new Date(sub.date).toLocaleString() : ''}</div>
+        <hr>
+      `;
+      container.appendChild(div);
+    });
+  } catch (err) {
+    container.innerHTML = '<div>Error loading contact submissions.</div>';
+  }
+}
+
+// Hook up contact submissions section
+sidebarLinks.forEach(link => {
+  link.addEventListener('click', () => {
+    const section = link.dataset.section;
+    if (section === 'contacts') {
+      loadContactsSection();
+    }
+  });
+});
+
 // Initial load for dashboard
 async function loadDashboard() {
   // Fetch counts
@@ -184,5 +226,43 @@ function renderAnalyticsChart(analytics) {
     options: { responsive: true, plugins: { legend: { display: false } } }
   });
 }
+
+// Render analytics section
+async function loadAnalyticsSection() {
+  const canvas = document.getElementById('analytics-chart');
+  const ctx = canvas.getContext('2d');
+  canvas.parentElement.innerHTML = '<canvas id="analytics-chart" width="400" height="200"></canvas>';
+  try {
+    const res = await apiFetch(`${API_BASE}/api/analytics`);
+    const analytics = await res.json();
+    // Recreate canvas in case of multiple loads
+    const newCanvas = document.getElementById('analytics-chart');
+    const newCtx = newCanvas.getContext('2d');
+    new Chart(newCtx, {
+      type: 'bar',
+      data: {
+        labels: ['Page Views', 'Unique Visitors', 'Resume Downloads'],
+        datasets: [{
+          label: 'Analytics',
+          data: [analytics.pageViews || 0, (analytics.uniqueVisitors || []).length, (analytics.resumeDownloads || []).length],
+          backgroundColor: ['#4e73df', '#1cc88a', '#36b9cc']
+        }]
+      },
+      options: { responsive: true, plugins: { legend: { display: false } } }
+    });
+  } catch (err) {
+    canvas.parentElement.innerHTML = '<div>Error loading analytics data.</div>';
+  }
+}
+
+// Hook up analytics section
+sidebarLinks.forEach(link => {
+  link.addEventListener('click', () => {
+    const section = link.dataset.section;
+    if (section === 'analytics') {
+      loadAnalyticsSection();
+    }
+  });
+});
 
 // TODO: Add CRUD actions for projects, certificates, skills, contacts 
