@@ -2,7 +2,7 @@
 const API_BASE =
   window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
     ? 'http://localhost:4000'
-    : 'https://your-backend-url.com'; // <-- Replace with your deployed backend URL
+    : (window.BACKEND_URL || 'https://portfolio-xi-amber-74.vercel.app');
 const loginContainer = document.getElementById('admin-login');
 const dashboardContainer = document.getElementById('admin-dashboard');
 const loginForm = document.getElementById('admin-login-form');

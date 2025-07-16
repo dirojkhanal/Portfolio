@@ -18,7 +18,7 @@ const header = document.getElementById('header');
 const BACKEND_URL =
   window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
     ? 'http://localhost:4000'
-    : 'https://your-backend-url.com'; // <-- Replace with your deployed backend URL
+    : (window.BACKEND_URL || 'https://portfolio-xi-amber-74.vercel.app');
 
 // ============ MOBILE MENU FUNCTIONALITY ============
 /**
